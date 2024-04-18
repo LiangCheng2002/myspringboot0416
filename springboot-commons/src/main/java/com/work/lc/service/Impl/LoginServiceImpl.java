@@ -1,6 +1,7 @@
 package com.work.lc.service.Impl;
 
 import com.work.lc.model.ResponseResult;
+import com.work.lc.model.ResponseStatus;
 import com.work.lc.service.LoginService;
 import com.work.lc.util.JwtUtil;
 import com.work.lc.util.RedisCache;
@@ -47,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
         HashMap<String,String> map = new HashMap<>();
         map.put("token",jwt);
         log.info("用户登录成功");
-        return new ResponseResult(200,"登陆成功",map);
+        return new ResponseResult(ResponseStatus.SUCCESS.getCode(), ResponseStatus.SUCCESS.getMessage(),map);
     }
 
     /**
