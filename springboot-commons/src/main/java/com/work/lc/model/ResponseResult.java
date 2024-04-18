@@ -24,7 +24,7 @@ public class ResponseResult<T> {
      * 响应信息
      *
      */
-    private String msg;
+    private String message;
 
     /**
      * 返回数据
@@ -37,9 +37,9 @@ public class ResponseResult<T> {
         this.data = data;
     }
 
-    public ResponseResult(Integer code, String msg){
+    public ResponseResult(Integer code, String message){
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 
 

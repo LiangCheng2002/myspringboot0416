@@ -20,9 +20,15 @@
     <description>springboot0416</description>
     <properties>
         <java.version>1.8</java.version>
+        <spring-boot.version>2.7.2</spring-boot.version> <!-- 显式指定 Spring Boot 版本 -->
     </properties>
     <dependencies>
-
+        <!--        lombok依赖-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
 
     </dependencies>
 
