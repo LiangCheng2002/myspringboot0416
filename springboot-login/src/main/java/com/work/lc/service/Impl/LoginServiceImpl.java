@@ -6,6 +6,7 @@ import com.work.lc.util.JwtUtil;
 import com.work.lc.util.RedisCache;
 import com.work.lc.vo.LoginDetails;
 import com.work.lc.vo.LoginUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +22,7 @@ import java.util.HashMap;
  * 用户登录服务
  *
  */
+@Slf4j
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -32,13 +34,12 @@ public class LoginServiceImpl implements LoginService {
 
     public ResponseResult login(LoginDetails loginDetails) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginDetails.getUsername(), loginDetails.getPassword());
-        Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken);//流程很多
+        Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         if(ObjectUtils.isEmpty(authenticate)) {
+            log.info("用户名或密码错误");
             throw new RuntimeException("用户用户名或密码错误");
         }
-        System.out.println(authenticate.getPrincipal());
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
-        System.out.println(loginUser.toString());
         String userId = loginUser.getUser().getId().toString();
         String jwt = JwtUtil.createJWT(userId);
         //authenticate存入redis
@@ -46,6 +47,7 @@ public class LoginServiceImpl implements LoginService {
         //把token响应给前端
         HashMap<String,String> map = new HashMap<>();
         map.put("token",jwt);
+        log.info("用户登录成功");
         return new ResponseResult(200,"登陆成功",map);
     }
 
