@@ -1,8 +1,6 @@
 package com.work.lc.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Table;
@@ -10,10 +8,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Component
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "sys_user")
+@Data
 public class User implements Serializable {
     private static final long serialVersionUID = -40356785423868312L;
 

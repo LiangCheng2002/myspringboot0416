@@ -17,14 +17,14 @@ import java.util.List;
  *
  */
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+  public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Example example = new Example(User.class);
-        example.createCriteria().andEqualTo("username", username);
+        example.createCriteria().andEqualTo("userName", username);
         List<User> users = userMapper.selectByExample(example);
         if(users.size()>0){
             User user = users.get(0);
